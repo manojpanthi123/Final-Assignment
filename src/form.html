@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+    <style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    background: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================= HEADER / NAVBAR =================
+   Flexbox row. Padding and gap space the logo, links and search.
+*/
+
+header {
+    min-height: 52px;
+    background: linear-gradient(to bottom, #c4e2ba, #9fd381);
+    display: flex;
+    align-items: center;
+    padding: 0 18px 0 14px;
+    gap: 16px;
+    position: relative;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.logo svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 42px;
+}
+
+nav a {
+    color: #111;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    padding: 4px 8px;
+}
+
+nav a.active {
+    color: #e03a00;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+}
+
+nav a:hover {
+    color: #111;
+    background: #ffff00;
+    text-decoration: none;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.icon-btn {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #222;
+}
+
+.icon-btn:hover {
+    color: #174f08;
+}
+
+/* ================= PAGE LAYOUT =================
+   Desktop: CSS Grid — 190px sidebar + main.
+   Mobile: one column; sidebar uses Flexbox in a row.
+*/
+
+.page {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 0;
+    background: #fff;
+}
+
+.sidebar {
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.side-btn {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 10px;
+    border: 2px solid #777;
+    background: #fff;
+    color: #0000a0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.side-btn.active {
+    background: #ffbd00;
+    color: #001a9e;
+}
+
+.side-btn:hover {
+    background: #ffd04a;
+}
+
+main {
+    min-width: 0;
+    padding: 18px 22px 28px 8px;
+}
+
+.panel.hidden {
+    display: none;
+}
+
+/* ================= HTML FORM =================
+   Two-column CSS Grid (label | field). Padding and gap set spacing.
+   On small screens the grid drops to one column.
+*/
+
+.form-page-title {
+    font-size: 22px;
+    margin: 0 0 8px;
+}
+
+.form-intro {
+    max-width: 640px;
+    margin: 0 0 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.html-form {
+    background: #e6e6e6;
+    border: 1px solid #cfcfcf;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 14px;
+    row-gap: 10px;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+}
+
+.html-form label,
+.html-form .field-label,
+.html-form .tall-label {
+    text-align: left;
+    font-size: 14px;
+}
+
+.html-form input[type="text"],
+.html-form select,
+.html-form textarea {
+    width: 100%;
+    max-width: 280px;
+    padding: 4px 6px;
+    border: 1px solid #767676;
+    background: #fff;
+    font: inherit;
+    font-size: 13px;
+}
+
+.html-form textarea {
+    max-width: 320px;
+    min-height: 88px;
+    resize: vertical;
+}
+
+.html-form .tall-label {
+    align-self: start;
+    padding-top: 6px;
+    line-height: 1.35;
+}
+
+.address-heading {
+    grid-column: 1 / -1;
+    font-size: 15px;
+    margin: 6px 0 2px;
+}
+
+.option-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.option-row.wrap {
+    gap: 14px 18px;
+}
+
+.inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.inline input {
+    width: auto;
+    margin: 0;
+}
+
+.html-actions {
+    grid-column: 2;
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.grey-btn {
+    background: #e0e0e0;
+    border: 1px solid #8d8d8d;
+    border-radius: 2px;
+    padding: 3px 14px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.grey-btn:hover {
+    background: #d0d0d0;
+}
+
+.form-message {
+    grid-column: 1 / -1;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #1b6b1b;
+}
+
+.form-message.form-error {
+    color: #b00020;
+}
+
+.form-message.form-ok {
+    color: #1b6b1b;
+}
+
+/* ================= GOOGLE FORM ================= */
+
+.gform-page {
+    background: #f0ebf8;
+    min-height: 100%;
+    margin: -18px -22px 0 -8px;
+    padding: 18px 16px 36px;
+}
+
+.gform-header-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 28px 24px 18px;
+    border: 1px solid #dadce0;
+    position: relative;
+    overflow: hidden;
+    max-width: 640px;
+    margin: 0 auto 16px;
+}
+
+.gform-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: #673ab7;
+}
+
+.gform-header-card h1 {
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: #202124;
+}
+
+.gform-intro {
+    font-size: 14px;
+    color: #202124;
+    margin-bottom: 12px;
+}
+
+.gform-intro a {
+    color: #1a73e8;
+}
+
+.gform-note {
+    font-size: 13px;
+    color: #5f6368;
+    margin-bottom: 12px;
+}
+
+.gform-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.gform-open-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #673ab7;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.gform-open-btn:hover {
+    background: #5e35b1;
+    color: #fff;
+}
+
+.gform-embed-box {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.gform-embed {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    height: 1860px;
+    margin: 0 auto;
+    border: 0;
+    background: #fff;
+    border-radius: 8px;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    min-height: 52px;
+    background: linear-gradient(to bottom, #c4e2ba, #a1d387);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 8px 18px;
+    gap: 12px;
+    border: none;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.social {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.social a {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.social a svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+}
+
+.copyright {
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.privacy {
+    justify-self: end;
+    color: #1558d6;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.privacy:hover {
+    color: #0b3fa8;
+}
+
+@media (min-width: 901px) {
+    .page {
+        grid-template-columns: 190px 1fr;
+    }
+
+    .sidebar {
+        flex-direction: column;
+        padding: 18px 14px;
+    }
+
+    .html-form {
+        grid-template-columns: minmax(160px, 240px) minmax(220px, 420px);
+        width: fit-content;
+        padding: 22px 28px 20px;
+    }
+
+    .html-form label,
+    .html-form .field-label,
+    .html-form .tall-label {
+        text-align: right;
+    }
+}
+
+/* ================= MOBILE AND TABLET ================= */
+
+@media (max-width: 900px) {
+    header {
+        flex-wrap: wrap;
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .side-btn {
+        min-height: 58px;
+        font-size: 15px;
+    }
+
+    main {
+        padding: 12px;
+    }
+
+    .html-form label,
+    .html-form .field-label,
+    .html-form .tall-label {
+        text-align: left;
+    }
+
+    .html-form input[type="text"],
+    .html-form select,
+    .html-form textarea {
+        max-width: none;
+    }
+
+    .html-actions {
+        grid-column: 1;
+    }
+
+    .gform-page {
+        margin: -12px -12px 0;
+        padding: 16px 10px 28px;
+    }
+
+    .gform-embed {
+        height: 2100px;
+    }
+
+    footer {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        gap: 8px;
+        padding: 12px;
+        border: none;
+    }
+
+    .privacy {
+        justify-self: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        flex-wrap: wrap;
+    }
+
+    .html-form {
+        padding: 14px 12px;
+        row-gap: 8px;
+    }
+
+    .option-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+    </style>
+    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="privacy.css">
+    <link rel="stylesheet" href="menu.css?v=left">
+</head>
+<body>
+
+    <header>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" title="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a class="logo" href="index.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="#1a1a1a" stroke-width="1.7"/>
+                <ellipse cx="12" cy="12" rx="4.5" ry="10" fill="none" stroke="#1a1a1a" stroke-width="1.4"/>
+                <path d="M2 12h20M4.2 7h15.6M4.2 17h15.6" fill="none" stroke="#1a1a1a" stroke-width="1.4"/>
+            </svg>
+            ITWD6.408
+        </a>
+
+        <nav id="mainNav" aria-label="Main navigation">
+            <a href="index.html">HOME</a>
+            <a class="active" href="form.html">FORMS</a>
+            <a href="web-api.html">WebAPI</a>
+            <a href="js-demo.html">JAVASCRIPT</a>
+            <a href="my-research.html">RESEARCH</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="icon-btn" type="button" aria-label="Search" title="Search">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2.2"/>
+                    <path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="page">
+        <aside class="sidebar">
+            <button type="button" class="side-btn active" id="btnHtml" data-panel="htmlPanel">
+                HTML FORM
+            </button>
+            <button type="button" class="side-btn" id="btnGoogle" data-panel="googlePanel">
+                GOOGLE FORM
+            </button>
+        </aside>
+
+        <main>
+            <!-- ================= HTML FORM ================= -->
+            <section id="htmlPanel" class="panel">
+                <h1 class="form-page-title">HTML form</h1>
+                <p class="form-intro">
+                    This HTML form is a mobile-phone survey. First name, last name, address line 1,
+                    town/city and gender are required. Submit stores the record in a JavaScript array
+                    and in the Supabase <code>mobile-uses</code> table.
+                </p>
+                <form id="htmlForm" class="html-form" action="#" method="post">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" autocomplete="given-name" minlength="2" maxlength="50" required>
+
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" autocomplete="family-name" minlength="2" maxlength="50" required>
+
+                    <h3 class="address-heading">Address</h3>
+
+                    <label for="line1">Line 1:</label>
+                    <input type="text" id="line1" name="line1" autocomplete="address-line1" maxlength="80" required>
+
+                    <label for="line2">Line 2:</label>
+                    <input type="text" id="line2" name="line2" autocomplete="address-line2" maxlength="80">
+
+                    <label for="city">Town/City:</label>
+                    <input type="text" id="city" name="city" autocomplete="address-level2" maxlength="50" required>
+
+                    <span class="field-label" id="genderLabel">Gender:</span>
+                    <div class="option-row" role="radiogroup" aria-labelledby="genderLabel">
+                        <label class="inline"><input type="radio" name="gender" value="Male" required> Male</label>
+                        <label class="inline"><input type="radio" name="gender" value="Female"> Female</label>
+                        <label class="inline"><input type="radio" name="gender" value="Other"> Other</label>
+                    </div>
+
+                    <span class="field-label">Mobile Phone Type:</span>
+                    <div class="option-row wrap">
+                        <label class="inline"><input type="checkbox" name="phoneType" value="iOS"> iOS</label>
+                        <label class="inline"><input type="checkbox" name="phoneType" value="Android"> Android</label>
+                        <label class="inline"><input type="checkbox" name="phoneType" value="Windows"> Windows</label>
+                        <label class="inline"><input type="checkbox" name="phoneType" value="Other"> Other</label>
+                    </div>
+
+                    <label for="provider">Mobile Provider:</label>
+                    <select id="provider" name="provider">
+                        <option value="None" selected>None</option>
+                        <option value="Spark">Spark</option>
+                        <option value="Vodafone">Vodafone</option>
+                        <option value="Now">Now</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <label for="study" class="tall-label">Do you use your phone for study? Please explain:</label>
+                    <textarea id="study" name="study" rows="5" maxlength="500"></textarea>
+
+                    <div class="html-actions">
+                        <button type="reset" class="grey-btn">Reset</button>
+                        <button type="submit" class="grey-btn">Submit</button>
+                    </div>
+                    <p id="htmlMessage" class="form-message" hidden></p>
+                </form>
+            </section>
+
+            <!-- ================= GOOGLE FORM ================= -->
+            <section id="googlePanel" class="panel hidden">
+                <div class="gform-page">
+                    <div class="gform-header-card">
+                        <div class="gform-accent"></div>
+                        <h1>Embedded Google Form</h1>
+                        <p class="gform-intro">
+                            This is the real Google Form for the mobile-phone survey. It is embedded on this page, and answers go to Google Sheets.
+                        </p>
+                        <p class="gform-note">
+                            Chrome usually shows the embed on this page. Safari often blocks Google cookies inside an iframe — if the form is blank or shows a robot check, use Open in a new tab.
+                        </p>
+                        <p class="gform-actions">
+                            <a class="gform-open-btn" id="googleFormOpen" href="https://docs.google.com/forms/d/e/1FAIpQLScWjitmx8iY995jtCE96GKxd1SwK8bplHpn_oRsDcie978UWQ/viewform" target="_blank" rel="noopener noreferrer">Open Google Form in a new tab</a>
+                            <a id="googleSheetLink" href="https://docs.google.com/spreadsheets/d/1DgLCTzVyn34sbmOsTUlUaTlJYFyOV_zqlUmr6svV2m8/edit?usp=sharing" target="_blank" rel="noopener noreferrer">View responses in Google Sheets</a>
+                        </p>
+                    </div>
+                    <div class="gform-embed-box">
+                        <iframe
+                            class="gform-embed"
+                            id="googleFormEmbed"
+                            title="Mobile Technology Form"
+                            src="https://docs.google.com/forms/d/e/1FAIpQLScWjitmx8iY995jtCE96GKxd1SwK8bplHpn_oRsDcie978UWQ/viewform?embedded=true"
+                            width="640"
+                            height="1860"
+                        >Loading…</iframe>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="social">
+            <a href="https://github.com/manojpanthi123" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#181717"/><path fill="#fff" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.77 2.36 1.26 2.94.96.09-.75.35-1.26.63-1.55-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.7.12 2.5.34 1.9-1.32 2.74-1.05 2.74-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#FF0000"/><path fill="#fff" d="M10 8.5v7l6-3.5-6-3.5z"/></svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#1DA1F2"/><path fill="#fff" d="M19.6 7.4c-.5.2-1.1.4-1.7.5.6-.4 1.1-1 1.3-1.7-.6.4-1.2.6-1.9.8A2.9 2.9 0 0 0 12 9.4c0 .2 0 .5.1.7-2.4-.1-4.6-1.3-6-3.1-.3.5-.4 1-.4 1.6 0 1 .5 1.9 1.3 2.5-.5 0-.9-.1-1.3-.4v.1c0 1.4 1 2.6 2.3 2.9-.2.1-.5.1-.8.1-.2 0-.4 0-.6-.1.4 1.2 1.5 2 2.8 2.1A5.8 5.8 0 0 1 5 16.6 8.2 8.2 0 0 0 9.4 18c5.3 0 8.2-4.4 8.2-8.2v-.4c.6-.4 1.1-1 1.5-1.6z"/></svg>
+            </a>
+            <a href="#" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#1877F2"/><path fill="#fff" d="M15.1 12.5h-2V19H10.3v-6.5H8.8V10h1.5V8.4c0-1.3.6-3.3 3.3-3.3h2.4v2.6h-1.7c-.3 0-.7.1-.7.8V10h2.5l-.4 2.5z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+                <svg viewBox="0 0 24 24">
+                    <defs>
+                        <linearGradient id="ig" x1="0" y1="1" x2="1" y2="0">
+                            <stop offset="0" stop-color="#f58529"/>
+                            <stop offset="0.5" stop-color="#dd2a7b"/>
+                            <stop offset="1" stop-color="#8134af"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="24" height="24" rx="2" fill="url(#ig)"/>
+                    <rect x="6.2" y="6.2" width="11.6" height="11.6" rx="3.4" fill="none" stroke="#fff" stroke-width="1.6"/>
+                    <circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" stroke-width="1.6"/>
+                    <circle cx="16.2" cy="7.8" r="0.9" fill="#fff"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="copyright"><strong>© Manoj Panthi (EIT)</strong></div>
+
+        <a class="privacy" href="#">Privacy Policy</a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="form.js"></script>
+    <script src="search.js"></script>
+    <script src="privacy.js"></script>
+    <script src="menu.js?v=left"></script>
+</body>
+</html>

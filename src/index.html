@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="privacy.css">
+    <link rel="stylesheet" href="menu.css?v=left">
+</head>
+<body>
+
+    <header>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" title="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a class="logo" href="index.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="#1a1a1a" stroke-width="1.7"/>
+                <ellipse cx="12" cy="12" rx="4.5" ry="10" fill="none" stroke="#1a1a1a" stroke-width="1.4"/>
+                <path d="M2 12h20M4.2 7h15.6M4.2 17h15.6" fill="none" stroke="#1a1a1a" stroke-width="1.4"/>
+            </svg>
+            ITWD6.408
+        </a>
+
+        <nav aria-label="Main navigation">
+            <a class="active" href="index.html">HOME</a>
+            <a href="form.html">FORMS</a>
+            <a href="web-api.html">WebAPI</a>
+            <a href="js-demo.html">JAVASCRIPT</a>
+            <a href="my-research.html">RESEARCH</a>
+        </nav>
+
+        <button class="search-btn" type="button" aria-label="Search" title="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2.2"/>
+                <path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+        </button>
+    </header>
+
+    <main>
+    <section class="hero">
+        <div class="hero-box">
+            <p class="eyebrow">Advanced Internet and Web Learning Portfolio</p>
+            <h1>I am Manoj Kumar Panthi</h1>
+            <p class="tagline">And I'm a Web Developer</p>
+        </div>
+    </section>
+
+    <div class="split">
+        <section class="bio">
+            <h2>BIO</h2>
+            <div class="bio-body">
+                <svg class="avatar" viewBox="0 0 200 200" role="img" aria-label="Profile illustration of Manoj Kumar Panthi">
+                    <defs>
+                        <clipPath id="round">
+                            <circle cx="100" cy="100" r="100"/>
+                        </clipPath>
+                    </defs>
+                    <g clip-path="url(#round)">
+                        <rect width="200" height="200" fill="#3d5a80"/>
+                        <circle cx="100" cy="210" r="90" fill="#1d3557"/>
+                        <path d="M40 210c8-48 28-78 60-78s52 30 60 78" fill="#457b9d"/>
+                        <circle cx="100" cy="86" r="42" fill="#e8b896"/>
+                        <path d="M58 78c6-34 24-52 42-52 20 0 40 16 46 50 2 14-8 22-20 20-10 18-38 20-52 4-12 4-18-6-16-22z" fill="#2b2118"/>
+                        <path d="M78 92c4 2 8 2 12 0" stroke="#5a3a28" stroke-width="2" fill="none"/>
+                        <path d="M110 92c4 2 8 2 12 0" stroke="#5a3a28" stroke-width="2" fill="none"/>
+                        <path d="M88 108c8 8 16 8 24 0" stroke="#c47a6a" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+                        <ellipse cx="88" cy="96" rx="5" ry="6" fill="#2c2218"/>
+                        <ellipse cx="112" cy="96" rx="5" ry="6" fill="#2c2218"/>
+                    </g>
+                    <circle cx="100" cy="100" r="98" fill="none" stroke="#fff" stroke-width="4"/>
+                </svg>
+                <div class="bio-text">
+                    <p>
+                        Kia ora. I am Manoj Kumar Panthi, a student on the ITWD6.408 Advanced Internet
+                        and Web Development paper at EIT. I built this portfolio to practise real web
+                        pages: semantic HTML, CSS layout, forms, JavaScript demos and a small shop
+                        that stores accounts in a Supabase users table.
+                    </p>
+                    <p>
+                        I am taking this paper to get stronger at CSS Grid and Flexbox, accessible forms,
+                        and using APIs so a static site can read and write data. I hope to finish with
+                        pages I can explain in a walkthrough and reuse in later projects.
+                    </p>
+                    <p>
+                        Outside class I like football, cooking, and taking photos around Hawke’s Bay.
+                        I also enjoy turning assignment briefs into working pages and helping classmates
+                        debug layout issues.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="technologies">
+            <h2>MY WEB TECHNOLOGIES</h2>
+            <p class="tech-sub">TOP 5 WEB TECHNOLOGIES I USE:</p>
+            <ol class="tech-list">
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer">HTML5</a> for page structure, landmarks, forms and the markup on every page of this site.</li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener noreferrer">CSS3</a> for layout (Grid and Flexbox), colour, spacing and the mobile navbar.</li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer">JavaScript</a> for slideshows, comments, the shop dashboard and sign in against Supabase.</li>
+                <li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual Studio Code</a> as my editor, with browser tools to check layout and forms.</li>
+                <li><a href="https://supabase.com/docs" target="_blank" rel="noopener noreferrer">Supabase</a> as the hosted Postgres database for the Demo 4 users table.</li>
+            </ol>
+        </section>
+    </div>
+
+    <section class="competences">
+        <h2>MY WEB DEVELOPMENT COMPETENCES</h2>
+        <div class="competence-row">
+            <article class="competence" tabindex="0">
+                <div class="competence-inner">
+                    <div class="competence-front">
+                        <h3>MARK-UP (HTML5)</h3>
+                        <div class="logo-circle">
+                            <img src="images/html5.png" alt="HTML5 logo">
+                        </div>
+                    </div>
+                    <div class="competence-back">
+                        <h3>MARK-UP (HTML5)</h3>
+                        <p>My rating</p>
+                        <div class="stars" aria-label="5 out of 5 stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="competence" tabindex="0">
+                <div class="competence-inner">
+                    <div class="competence-front">
+                        <h3>STYLING (CSS3)</h3>
+                        <div class="logo-circle">
+                            <img src="images/css3.png" alt="CSS3 logo">
+                        </div>
+                    </div>
+                    <div class="competence-back">
+                        <h3>STYLING (CSS3)</h3>
+                        <p>My rating</p>
+                        <div class="stars" aria-label="4 out of 5 stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="competence" tabindex="0">
+                <div class="competence-inner">
+                    <div class="competence-front">
+                        <h3>JAVASCRIPT</h3>
+                        <div class="logo-circle">
+                            <img src="images/javascript.png" alt="JavaScript logo">
+                        </div>
+                    </div>
+                    <div class="competence-back">
+                        <h3>JAVASCRIPT</h3>
+                        <p>My rating</p>
+                        <div class="stars" aria-label="3 out of 5 stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="authenticity">
+        <h2>STATEMENT OF AUTHENTICITY</h2>
+        <p>
+            I confirm that:<br>
+            This is an original assessment and is entirely my own work.<br>
+            It contains no material previously published or written by another person or myself except where due acknowledgement is made in the text.<br>
+            No material which to a substantial extent, has been submitted for any other academic course, is included without acknowledgement.
+        </p>
+    </section>
+    </main>
+
+    <footer>
+        <div class="social">
+            <a href="https://github.com/manojpanthi123" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#181717"/><path fill="#fff" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.77 2.36 1.26 2.94.96.09-.75.35-1.26.63-1.55-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.7.12 2.5.34 1.9-1.32 2.74-1.05 2.74-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#FF0000"/><path fill="#fff" d="M10 8.5v7l6-3.5-6-3.5z"/></svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#1DA1F2"/><path fill="#fff" d="M19.6 7.4c-.5.2-1.1.4-1.7.5.6-.4 1.1-1 1.3-1.7-.6.4-1.2.6-1.9.8A2.9 2.9 0 0 0 12 9.4c0 .2 0 .5.1.7-2.4-.1-4.6-1.3-6-3.1-.3.5-.4 1-.4 1.6 0 1 .5 1.9 1.3 2.5-.5 0-.9-.1-1.3-.4v.1c0 1.4 1 2.6 2.3 2.9-.2.1-.5.1-.8.1-.2 0-.4 0-.6-.1.4 1.2 1.5 2 2.8 2.1A5.8 5.8 0 0 1 5 16.6 8.2 8.2 0 0 0 9.4 18c5.3 0 8.2-4.4 8.2-8.2v-.4c.6-.4 1.1-1 1.5-1.6z"/></svg>
+            </a>
+            <a href="#" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#1877F2"/><path fill="#fff" d="M15.1 12.5h-2V19H10.3v-6.5H8.8V10h1.5V8.4c0-1.3.6-3.3 3.3-3.3h2.4v2.6h-1.7c-.3 0-.7.1-.7.8V10h2.5l-.4 2.5z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+                <svg viewBox="0 0 24 24">
+                    <defs>
+                        <linearGradient id="ig" x1="0" y1="1" x2="1" y2="0">
+                            <stop offset="0" stop-color="#f58529"/>
+                            <stop offset="0.5" stop-color="#dd2a7b"/>
+                            <stop offset="1" stop-color="#8134af"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="24" height="24" rx="2" fill="url(#ig)"/>
+                    <rect x="6.2" y="6.2" width="11.6" height="11.6" rx="3.4" fill="none" stroke="#fff" stroke-width="1.6"/>
+                    <circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" stroke-width="1.6"/>
+                    <circle cx="16.2" cy="7.8" r="0.9" fill="#fff"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="copyright"><strong>© Manoj Panthi (EIT)</strong></div>
+
+        <a class="privacy" href="#">Privacy Policy</a>
+    </footer>
+
+    <script>
+        document.querySelectorAll(".competence").forEach(function (card) {
+            card.addEventListener("click", function () {
+                card.classList.toggle("flipped");
+            });
+        });
+    </script>
+    <script src="search.js"></script>
+    <script src="privacy.js"></script>
+    <script src="menu.js?v=left"></script>
+
+</body>
+</html>

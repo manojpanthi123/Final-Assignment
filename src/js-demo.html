@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Demos</title>
+    <style>
+/* =================================================
+   GENERAL RESET
+================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+/* =================================================
+   BODY
+================================================= */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #ffffff;
+
+    color: #222;
+
+    line-height: 1.5;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+/* =================================================
+   HEADER
+================================================= */
+
+header {
+    min-height: 52px;
+    background: linear-gradient(to bottom, #c4e2ba, #9fd381);
+    display: flex;
+    align-items: center;
+    padding: 0 18px 0 14px;
+    gap: 16px;
+    position: relative;
+    z-index: 100;
+    overflow: visible;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.logo svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+header nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 42px;
+}
+
+header nav a {
+    color: #111;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    padding: 4px 8px;
+}
+
+header nav a.active {
+    color: #e03a00;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+}
+
+header nav a:hover {
+    color: #111;
+    background: #ffff00;
+    text-decoration: none;
+}
+
+.search-btn {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #222;
+    flex-shrink: 0;
+}
+
+.search-btn:hover {
+    color: #174f08;
+}
+
+/* =================================================
+   MAIN LAYOUT
+================================================= */
+
+.main-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 15px auto;
+    padding: 0 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    flex: 1;
+}
+
+.demo-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+@media (min-width: 901px) {
+    .main-container {
+        grid-template-columns: 150px 1fr;
+        margin: 25px auto;
+        padding: 0 20px;
+    }
+
+    .demo-menu {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: none;
+    }
+}
+
+/* Demo buttons */
+
+.demo-button {
+    width: 100%;
+
+    min-height: 45px;
+
+    background: white;
+
+    border: 2px solid #777;
+
+    color: #0000a0;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+/* Hover */
+
+.demo-button:hover {
+    background: #ffd04a;
+}
+
+/* Active */
+
+.demo-button.active {
+    background: #ffbd00;
+
+    color: #001a9e;
+}
+
+/* =================================================
+   CONTENT
+================================================= */
+
+.content {
+    min-width: 0;
+}
+
+/* Hide demos */
+
+.demo {
+    display: none;
+}
+
+/* Show active demo */
+
+.active-demo {
+    display: block;
+}
+
+/* Heading */
+
+.demo h1 {
+    font-size: 22px;
+
+    margin-bottom: 10px;
+}
+
+/* Intro */
+
+.intro-text {
+    font-size: 14px;
+
+    margin-bottom: 20px;
+
+    color: #444;
+}
+
+/* =================================================
+   DEMO 1
+================================================= */
+
+.automatic-box,
+.manual-box {
+    text-align: center;
+
+    padding: 18px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid #c99f38;
+}
+
+/* Automatic */
+
+.automatic-box {
+    background: #fff3cf;
+}
+
+/* Manual */
+
+.manual-box {
+    background: #ffe8c5;
+
+    border-color: #d39a55;
+}
+
+.automatic-box h2,
+.manual-box h2 {
+    font-size: 17px;
+
+    margin-bottom: 8px;
+}
+
+/* Slideshow image */
+
+.automatic-box img,
+.manual-box img {
+    width: 330px;
+
+    max-width: 100%;
+
+    height: 190px;
+
+    object-fit: cover;
+
+    display: block;
+
+    margin: 12px auto;
+
+    border: 2px solid #333;
+}
+
+/* Description */
+
+.automatic-box p,
+.manual-box p {
+    max-width: 600px;
+
+    margin: 5px auto;
+
+    font-size: 13px;
+}
+
+/* Slide buttons */
+
+.slide-controls {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 15px;
+}
+
+.slide-controls button {
+    padding: 6px 12px;
+
+    border: 1px solid #56883d;
+
+    background: #b8df9d;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.slide-controls button:hover {
+    background: #8fc873;
+}
+
+/* =================================================
+   DEMO 2
+================================================= */
+
+.product-detail {
+    width: 350px;
+
+    max-width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #777;
+
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+.product-detail h2 {
+    font-size: 17px;
+}
+
+.product-detail img {
+    width: 180px;
+
+    height: 200px;
+
+    object-fit: cover;
+
+    margin: 10px;
+}
+
+.product-detail p {
+    text-align: left;
+
+    font-size: 13px;
+}
+
+/* Comments */
+
+.comments-box {
+    max-width: 650px;
+}
+
+.comments-box h2 {
+    font-size: 17px;
+
+    margin-bottom: 10px;
+}
+
+.comments-box h3 {
+    font-size: 15px;
+
+    margin: 15px 0 5px;
+}
+
+/* Comment */
+
+.comment {
+    border: 1px solid #aaa;
+
+    padding: 7px;
+
+    margin-bottom: 3px;
+
+    font-size: 13px;
+}
+
+/* Form */
+
+.comments-box label {
+    display: block;
+
+    font-size: 13px;
+
+    margin-top: 7px;
+}
+
+.comments-box input,
+.comments-box textarea {
+    width: 100%;
+
+    padding: 8px;
+
+    border: 1px solid #999;
+
+    outline: none;
+}
+
+.comments-box textarea {
+    height: 90px;
+
+    resize: vertical;
+}
+
+/* Post button */
+
+.post-button {
+    margin-top: 6px;
+
+    padding: 7px 15px;
+
+    background: #8bc66c;
+
+    border: 1px solid #56883d;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.customise-box,
+.vote-box,
+.favourite-box {
+    max-width: 650px;
+    margin: 0 0 16px;
+    padding: 12px;
+    border: 1px solid #c99f38;
+    background: #fff8e8;
+}
+
+.customise-box label,
+.vote-box button {
+    margin-right: 8px;
+}
+
+.vote-box button,
+.customise-box select,
+.customise-box input[type="color"] {
+    margin: 4px 8px 4px 0;
+    padding: 6px 10px;
+}
+
+.illustration-image {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    height: 140px;
+    object-fit: cover;
+    margin: 10px 0 8px;
+    border: 1px solid #c99f38;
+}
+
+.post-text {
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 8px 0;
+}
+
+.post-text.collapsed {
+    max-height: 4.6em;
+    overflow: hidden;
+}
+
+#moreLessBtn {
+    padding: 6px 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cart-controls input[type="search"] {
+    flex: 1;
+    min-width: 140px;
+    padding: 8px 10px;
+    border: 1px solid #777;
+}
+
+/* =================================================
+   DEMO 3
+================================================= */
+
+.dropdown-box {
+    max-width: 650px;
+
+    padding: 18px;
+
+    background: #f7f7f7;
+
+    border: 1px solid #ccc;
+}
+
+.dropdown-box h2 {
+    font-size: 18px;
+
+    margin-bottom: 12px;
+}
+
+.dropdown-box label {
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+.dropdown-box select {
+    padding: 8px;
+
+    margin-left: 8px;
+
+    border: 1px solid #888;
+}
+
+/* Selected product */
+
+.selected-product {
+    margin: 20px 0;
+
+    padding: 15px;
+
+    background: white;
+
+    border: 1px solid #aaa;
+
+    text-align: center;
+}
+
+.selected-product h2 {
+    margin-bottom: 8px;
+}
+
+.selected-product img {
+    width: 250px;
+
+    max-width: 100%;
+
+    height: 160px;
+
+    object-fit: cover;
+
+    margin-bottom: 8px;
+}
+
+/* Add product inputs */
+
+.dropdown-box input {
+    padding: 8px;
+
+    width: 40%;
+
+    border: 1px solid #999;
+
+    margin: 3px;
+}
+
+/* Add button */
+
+.dropdown-box button {
+    padding: 8px 12px;
+
+    background: #8bc66c;
+
+    border: 1px solid #56883d;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+/* New product */
+
+.new-product {
+    margin-top: 8px;
+
+    padding: 8px;
+
+    background: #e4f3dc;
+
+    border: 1px solid #8ab876;
+}
+
+/* =================================================
+   DEMO 4
+================================================= */
+
+.cart-heading {
+    font-size: 21px;
+
+    margin: 15px 0;
+}
+
+.cart-heading-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 15px 0;
+}
+
+.cart-heading-row .cart-heading {
+    margin: 0;
+}
+
+.cart-icon-btn {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 44px;
+
+    height: 44px;
+
+    border: 1px solid #777;
+
+    background: #eee;
+
+    cursor: pointer;
+
+    border-radius: 4px;
+
+    color: #222;
+}
+
+.cart-icon-btn:hover {
+    background: #ddd;
+}
+
+.cart-count {
+    position: absolute;
+
+    top: -5px;
+
+    right: -5px;
+
+    min-width: 18px;
+
+    height: 18px;
+
+    padding: 0 5px;
+
+    background: #c0392b;
+
+    color: #fff;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    border-radius: 9px;
+
+    line-height: 18px;
+
+    text-align: center;
+}
+
+/* Cart buttons */
+
+.cart-controls {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+.cart-controls button {
+    padding: 8px 12px;
+
+    border: 1px solid #777;
+
+    background: #eee;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+/* =================================================
+   SHOPPING PRODUCT GRID
+================================================= */
+
+.shopping-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+/* Product card */
+
+.shopping-card {
+    background: #ffff00;
+
+    border: 1px solid #777;
+
+    padding: 8px;
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+.shopping-card[hidden] {
+    display: none;
+}
+
+/* Product title */
+
+.shopping-card h3 {
+    font-size: 14px;
+
+    margin-bottom: 8px;
+}
+
+/* Product image */
+
+.shopping-card img {
+    width: 100%;
+
+    height: 130px;
+
+    object-fit: cover;
+
+    background: white;
+}
+
+/* Product text */
+
+.shopping-card p {
+    font-size: 11px;
+
+    margin: 5px 0;
+}
+
+.card-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 6px;
+}
+
+.shopping-card button {
+    flex: 1;
+    padding: 6px;
+    background: white;
+    border: 1px solid #555;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.shopping-card .buy-btn {
+    background: #ffbd00;
+    color: #001a9e;
+}
+
+.shopping-card button:hover {
+    background: #ddd;
+}
+
+.shopping-card .buy-btn:hover {
+    background: #ffd04a;
+}
+
+/* Buy popup */
+
+.buy-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.buy-modal[hidden] {
+    display: none;
+}
+
+.buy-dialog {
+    width: min(420px, 100%);
+    max-height: 90vh;
+    overflow: auto;
+    background: #fff;
+    border: 2px solid #777;
+    border-radius: 6px;
+    padding: 18px 18px 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.buy-dialog h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.buy-product-line {
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.buy-dialog label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 8px 0 4px;
+}
+
+.buy-dialog input,
+.buy-dialog textarea,
+.buy-dialog select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 7px 8px;
+    border: 1px solid #999;
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.buy-dialog input[readonly] {
+    background: #fff;
+    color: inherit;
+    cursor: text;
+}
+
+.buy-message {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #1b6b1b;
+}
+
+.buy-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.buy-actions button {
+    padding: 7px 12px;
+    border: 1px solid #777;
+    background: #eee;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.buy-submit {
+    background: #ffbd00 !important;
+    color: #001a9e;
+}
+
+/* =================================================
+   CART OUTPUT
+================================================= */
+
+.cart-output {
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 15px;
+
+    background: #f5f5f5;
+
+    border: 2px solid #777;
+}
+
+.cart-item {
+    padding: 7px;
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.cart-total {
+    margin: 12px 0 10px;
+}
+
+.checkout-btn {
+    padding: 8px 16px;
+    border: 2px solid #777;
+    background: #ffbd00;
+    color: #001a9e;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.checkout-btn:hover {
+    background: #ffd04a;
+}
+
+/* =================================================
+   DEMO 4 AUTH + DASHBOARD
+================================================= */
+
+.auth-gate {
+    max-width: 520px;
+    margin: 10px 0 20px;
+    padding: 22px 20px;
+    background: #fff8d6;
+    border: 2px solid #c9a024;
+    text-align: center;
+}
+
+.auth-gate h2 {
+    margin-bottom: 8px;
+}
+
+.auth-open-btn,
+.profile-actions button,
+.auth-tab {
+    padding: 8px 14px;
+    border: 2px solid #777;
+    background: #ffbd00;
+    color: #001a9e;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.auth-tabs {
+    display: flex;
+    gap: 8px;
+    margin: 8px 0 14px;
+}
+
+.auth-tab {
+    flex: 1;
+    background: #eee;
+    color: #111;
+}
+
+.auth-tab.active {
+    background: #ffbd00;
+    color: #001a9e;
+}
+
+.auth-message {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #1b6b1b;
+}
+
+.auth-message.auth-error {
+    color: #b42318;
+}
+
+.profile-card {
+    background: #f5fff0;
+    border: 2px solid #8ab876;
+    padding: 16px;
+    margin-bottom: 18px;
+}
+
+.welcome-line {
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.profile-card label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 8px 0 4px;
+}
+
+.profile-card input {
+    width: 100%;
+    max-width: 360px;
+    padding: 7px 8px;
+    border: 1px solid #999;
+    font-size: 13px;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.chart-card {
+    background: #fff;
+    border: 1px solid #777;
+    padding: 10px;
+    height: 260px;
+}
+
+.chart-card h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+#shopCalendar {
+    background: #fff;
+    border: 1px solid #777;
+    padding: 8px;
+    margin-bottom: 22px;
+}
+
+/* =================================================
+   FOOTER
+================================================= */
+
+footer {
+    min-height: 60px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 10px 25px;
+
+    background: linear-gradient(
+        to bottom,
+        #d8f2c8,
+        #9bd47c
+    );
+
+    border-top: 1px solid #6fa94e;
+
+    font-size: 13px;
+}
+
+.copyright {
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.copyright strong {
+    font-weight: 700;
+}
+
+/* Social icons */
+
+.social {
+    display: flex;
+
+    gap: 6px;
+}
+
+.social a {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    text-decoration: none;
+    border: none;
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.social a svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+}
+
+footer > a {
+    color: blue;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+/* =================================================
+   TABLET RESPONSIVE
+================================================= */
+
+@media (min-width: 601px) {
+    .shopping-grid,
+    .chart-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 901px) {
+    .shopping-grid,
+    .chart-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    header {
+        flex-wrap: wrap;
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    header nav {
+        gap: 15px;
+    }
+
+}
+
+/* =================================================
+   MOBILE RESPONSIVE
+================================================= */
+
+@media (max-width: 600px) {
+
+    header {
+        flex-wrap: wrap;
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 14px;
+    }
+
+    .demo-button {
+        min-height: 40px;
+    }
+
+    /* Slideshow */
+
+    .automatic-box img,
+    .manual-box img {
+        height: 170px;
+    }
+
+    /* Dropdown */
+
+    .dropdown-box select {
+        width: 100%;
+
+        margin: 8px 0;
+    }
+
+    .dropdown-box input {
+        width: 100%;
+
+        margin: 5px 0;
+    }
+
+    /* Footer */
+
+    footer {
+        flex-direction: column;
+
+        gap: 10px;
+
+        text-align: center;
+    }
+
+}
+
+/* =================================================
+   SMALL MOBILE
+================================================= */
+
+@media (max-width: 400px) {
+
+    .automatic-box,
+    .manual-box {
+        padding: 10px;
+    }
+
+    .automatic-box img,
+    .manual-box img {
+        height: 150px;
+    }
+
+    .slide-controls button {
+        font-size: 11px;
+    }
+
+}
+    </style>
+    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="privacy.css">
+    <link rel="stylesheet" href="menu.css?v=left">
+</head>
+<body>
+
+    <header>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" title="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a class="logo" href="index.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="#1a1a1a" stroke-width="1.7"/>
+                <ellipse cx="12" cy="12" rx="4.5" ry="10" fill="none" stroke="#1a1a1a" stroke-width="1.4"/>
+                <path d="M2 12h20M4.2 7h15.6M4.2 17h15.6" fill="none" stroke="#1a1a1a" stroke-width="1.4"/>
+            </svg>
+            ITWD6.408
+        </a>
+        <nav aria-label="Main navigation">
+            <a href="index.html">HOME</a>
+            <a href="form.html">FORMS</a>
+            <a href="web-api.html">WebAPI</a>
+            <a class="active" href="js-demo.html">JAVASCRIPT</a>
+            <a href="my-research.html">RESEARCH</a>
+        </nav>
+        <button class="search-btn" type="button" aria-label="Search" title="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2.2"/>
+                <path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+        </button>
+    </header>
+
+    <main class="main-container">
+        <aside class="demo-menu">
+            <button class="demo-button active" onclick="showDemo(1)">DEMO 1</button>
+            <button class="demo-button" onclick="showDemo(2)">DEMO 2</button>
+            <button class="demo-button" onclick="showDemo(3)">DEMO 3</button>
+            <button class="demo-button" onclick="showDemo(4)">DEMO 4</button>
+        </aside>
+
+        <section class="content">
+            <div id="demo1" class="demo active-demo">
+                <h1>Purpose:</h1>
+                <p class="intro-text">
+                    Demo 1 uses JavaScript timers and click handlers to run an automatic
+                    slideshow and a manual slideshow of product photos. You can also change
+                    the background colour, text size and illustration image, and use More/Less
+                    on a long post. Choices are stored with the Local Storage API.
+                </p>
+
+                <div class="customise-box">
+                    <h2>PAGE CUSTOMISATION</h2>
+                    <label for="pageBgColor">Background colour</label>
+                    <input type="color" id="pageBgColor" value="#fff8e8">
+                    <label for="pageTextSize">Text size</label>
+                    <select id="pageTextSize">
+                        <option value="14px">Small</option>
+                        <option value="16px" selected>Medium</option>
+                        <option value="20px">Large</option>
+                    </select>
+                    <label for="pageIllustration">Illustration image</label>
+                    <select id="pageIllustration">
+                        <option value="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80">Laptop</option>
+                        <option value="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=700&q=80">MacBook</option>
+                        <option value="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=80">Phone</option>
+                    </select>
+                    <img id="demoIllustration" class="illustration-image" src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80" alt="Selected illustration">
+                    <div class="long-post">
+                        <p id="longPostText" class="post-text collapsed">
+                            This portfolio page shows how JavaScript can customise a view without reloading.
+                            Local Storage remembers the colour, text size, illustration and whether this
+                            paragraph is expanded. On a small phone the short preview keeps the page easy
+                            to scan; tap More to read the rest. The same pattern is useful for product
+                            descriptions, blog posts and assignment notes that would otherwise fill the screen.
+                        </p>
+                        <button type="button" id="moreLessBtn">MORE</button>
+                    </div>
+                </div>
+
+                <div class="automatic-box">
+                    <h2>AUTOMATIC SLIDESHOW</h2>
+                    <p><strong id="autoTitle">HP Laptop</strong></p>
+                    <img id="autoImage" src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80" alt="Laptop">
+                    <p id="autoDescription">Modern laptop suitable for students and office work.</p>
+                </div>
+
+                <div class="manual-box">
+                    <h2>MANUAL SLIDESHOW</h2>
+                    <p><strong id="manualTitle">HP Laptop</strong></p>
+                    <img id="manualImage" src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80" alt="Laptop">
+                    <p id="manualDescription">Modern laptop suitable for students and office work.</p>
+                    <div class="slide-controls">
+                        <button onclick="previousSlide()">PREVIOUS</button>
+                        <button onclick="nextSlide()">NEXT</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="demo2" class="demo">
+                <h1>Purpose:</h1>
+                <p class="intro-text">
+                    Demo 2 shows a product, comments stored in a JavaScript array, one Like or
+                    Dislike vote, and a favourite list. New comments are added without reloading.
+                </p>
+
+                <div class="product-detail">
+                    <h2 id="detailTitle">Samsung Galaxy</h2>
+                    <img id="detailImage" src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80" alt="Smartphone">
+                    <p><strong>Product Description:</strong></p>
+                    <p id="detailDescription">Samsung Galaxy is a modern smartphone with a high-quality display and camera.</p>
+                </div>
+
+                <div class="vote-box">
+                    <button type="button" id="likeBtn" onclick="voteProduct('like')">Like</button>
+                    <span id="likeCount">0</span>
+                    <button type="button" id="dislikeBtn" onclick="voteProduct('dislike')">Dislike</button>
+                    <span id="dislikeCount">0</span>
+                    <button type="button" id="favBtn" onclick="toggleFavourite()">Add to favourites</button>
+                </div>
+                <div id="favouriteList" class="favourite-box"></div>
+
+                <div class="comments-box">
+                    <h2>Comments:</h2>
+                    <div id="commentsList"></div>
+                    <h3>Add your comment:</h3>
+                    <label for="commentName">Name:</label>
+                    <input type="text" id="commentName" placeholder="Enter your name">
+                    <label for="commentText">Comment:</label>
+                    <textarea id="commentText" placeholder="Write your comment"></textarea>
+                    <button class="post-button" onclick="addComment()">POST</button>
+                </div>
+            </div>
+
+            <div id="demo3" class="demo">
+                <h1>Purpose:</h1>
+                <p class="intro-text">
+                    Demo 3 uses a dropdown to change the selected product, and a small form
+                    to add extra products to a list with JavaScript.
+                </p>
+
+                <div class="dropdown-box">
+                    <h2>Dropdown Menu and Add an Item</h2>
+                    <label for="productSelect">Select Item:</label>
+                    <select id="productSelect" onchange="changeProduct()"></select>
+
+                    <div class="selected-product">
+                        <h2 id="selectedName">HP Envy x360</h2>
+                        <img id="selectedProductImage" src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80" alt="Selected Product">
+                        <p>Description: <strong id="selectedPrice">Convertible laptop for study and office work.</strong></p>
+                    </div>
+
+                    <h3>Add new item to existing list:</h3>
+                    <input type="text" id="newProductName" placeholder="Title">
+                    <input type="text" id="newProductDesc" placeholder="Description">
+                    <input type="url" id="newProductImage" placeholder="Image URL">
+                    <button onclick="addNewProduct()">ADD TO LIST</button>
+                    <div id="newProductList"></div>
+                </div>
+            </div>
+
+            <div id="demo4" class="demo">
+                <h1>Purpose:</h1>
+                <p class="intro-text">
+                    Demo 4 is an online shop with sign up / sign in and a dashboard.
+                    The users table is stored on Supabase. A cookie keeps the login name
+                    for this browser. After login you can update your details, view Chart.js
+                    graphs and FullCalendar. The six-product cart, search and sort stay on this demo.
+                </p>
+
+                <!-- Shown until the user signs in -->
+                <div id="authGate" class="auth-gate">
+                    <h2>SHOP ACCOUNT</h2>
+                    <p>Create an account or sign in to open the shop dashboard.</p>
+                    <button type="button" class="auth-open-btn" onclick="openAuthModal('signin')">SIGN IN / SIGN UP</button>
+                </div>
+
+                <!-- Shown after sign in -->
+                <div id="shopApp" class="shop-app" hidden>
+                    <section class="profile-card" id="profileCard">
+                        <h2>Your account</h2>
+                        <p id="welcomeLine" class="welcome-line"></p>
+                        <form id="profileForm">
+                            <label for="profileName">Full name</label>
+                            <input type="text" id="profileName" required>
+                            <label for="profileEmail">Email</label>
+                            <input type="email" id="profileEmail" readonly>
+                            <label for="profilePhone">Phone</label>
+                            <input type="tel" id="profilePhone">
+                            <p id="profileMessage" class="auth-message" hidden></p>
+                            <div class="profile-actions">
+                                <button type="submit">UPDATE DETAILS</button>
+                                <button type="button" onclick="signOutUser()">SIGN OUT</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <h2 class="cart-heading">SHOP DASHBOARD</h2>
+                    <div class="chart-grid">
+                        <article class="chart-card">
+                            <h3>Weekly sales (line)</h3>
+                            <canvas id="lineChart"></canvas>
+                        </article>
+                        <article class="chart-card">
+                            <h3>Units sold (bar)</h3>
+                            <canvas id="barChart"></canvas>
+                        </article>
+                        <article class="chart-card">
+                            <h3>Category share (pie)</h3>
+                            <canvas id="pieChart"></canvas>
+                        </article>
+                    </div>
+
+                    <h2 class="cart-heading">SHOP CALENDAR</h2>
+                    <div id="shopCalendar"></div>
+                </div>
+
+                    <div class="cart-heading-row">
+                        <h2 class="cart-heading">SHOPPING-CART</h2>
+                        <button type="button" class="cart-icon-btn" onclick="viewCart()" aria-label="View shopping cart" title="View shopping cart">
+                            <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+                                <path fill="currentColor" d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                            </svg>
+                            <span class="cart-count" id="cartBadge" hidden>0</span>
+                        </button>
+                    </div>
+                    <div class="cart-controls">
+                        <input type="search" id="productSearch" placeholder="Search products" oninput="filterProducts()">
+                        <button type="button" onclick="sortProductsByPrice()">SORT BY PRICE</button>
+                        <button type="button" onclick="viewCart()">VIEW SHOPPING CART</button>
+                        <button type="button" onclick="clearCart()">CLEAR CART</button>
+                    </div>
+
+                    <div class="shopping-grid">
+                        <div class="shopping-card" data-price="2244">
+                            <h3>HP Envy x360</h3>
+                            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=500&q=80" alt="HP Envy">
+                            <p>Price: <strong>$2244</strong></p>
+                            <p>Powerful laptop for everyday work.</p>
+                            <div class="card-actions">
+                                <button type="button" onclick="addToCart('HP Envy x360', 2244)">ADD TO CART</button>
+                                <button class="buy-btn" type="button" onclick="openBuyForm('HP Envy x360', 2244)">BUY</button>
+                            </div>
+                        </div>
+                        <div class="shopping-card" data-price="1349">
+                            <h3>Apple MacBook Air</h3>
+                            <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=500&q=80" alt="MacBook">
+                            <p>Price: <strong>$1349</strong></p>
+                            <p>Lightweight Apple laptop.</p>
+                            <div class="card-actions">
+                                <button type="button" onclick="addToCart('Apple MacBook Air', 1349)">ADD TO CART</button>
+                                <button class="buy-btn" type="button" onclick="openBuyForm('Apple MacBook Air', 1349)">BUY</button>
+                            </div>
+                        </div>
+                        <div class="shopping-card" data-price="999">
+                            <h3>HP ProOne 400</h3>
+                            <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=500&q=80" alt="Desktop">
+                            <p>Price: <strong>$999</strong></p>
+                            <p>Desktop computer for office.</p>
+                            <div class="card-actions">
+                                <button type="button" onclick="addToCart('HP ProOne 400', 999)">ADD TO CART</button>
+                                <button class="buy-btn" type="button" onclick="openBuyForm('HP ProOne 400', 999)">BUY</button>
+                            </div>
+                        </div>
+                        <div class="shopping-card" data-price="1509">
+                            <h3>Dell XPS 13</h3>
+                            <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=500&q=80" alt="Dell XPS">
+                            <p>Price: <strong>$1509</strong></p>
+                            <p>Compact and powerful laptop.</p>
+                            <div class="card-actions">
+                                <button type="button" onclick="addToCart('Dell XPS 13', 1509)">ADD TO CART</button>
+                                <button class="buy-btn" type="button" onclick="openBuyForm('Dell XPS 13', 1509)">BUY</button>
+                            </div>
+                        </div>
+                        <div class="shopping-card" data-price="2568">
+                            <h3>ASUS TUF Gaming</h3>
+                            <img src="https://images.unsplash.com/photo-1593642702749-b7d2a804fbcf?auto=format&fit=crop&w=500&q=80" alt="Gaming Laptop">
+                            <p>Price: <strong>$2568</strong></p>
+                            <p>Powerful gaming laptop.</p>
+                            <div class="card-actions">
+                                <button type="button" onclick="addToCart('ASUS TUF Gaming', 2568)">ADD TO CART</button>
+                                <button class="buy-btn" type="button" onclick="openBuyForm('ASUS TUF Gaming', 2568)">BUY</button>
+                            </div>
+                        </div>
+                        <div class="shopping-card" data-price="1599">
+                            <h3>Microsoft Surface</h3>
+                            <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=500&q=80" alt="Microsoft Surface">
+                            <p>Price: <strong>$1599</strong></p>
+                            <p>Modern touchscreen laptop.</p>
+                            <div class="card-actions">
+                                <button type="button" onclick="addToCart('Microsoft Surface', 1599)">ADD TO CART</button>
+                                <button class="buy-btn" type="button" onclick="openBuyForm('Microsoft Surface', 1599)">BUY</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cartOutput" class="cart-output"></div>
+            </div>
+        </section>
+    </main>
+
+    <div id="authModal" class="buy-modal" hidden>
+        <div class="buy-dialog auth-dialog" role="dialog" aria-labelledby="authTitle" aria-modal="true">
+            <h2 id="authTitle">Account</h2>
+            <div class="auth-tabs">
+                <button type="button" id="tabSignin" class="auth-tab active" onclick="showAuthTab('signin')">SIGN IN</button>
+                <button type="button" id="tabSignup" class="auth-tab" onclick="showAuthTab('signup')">SIGN UP</button>
+            </div>
+
+            <form id="signinForm" autocomplete="off">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
+                <label for="signinPassword">Password</label>
+                <input type="password" id="signinPassword" name="password" autocomplete="current-password" minlength="6" required>
+                <p id="signinMessage" class="auth-message" hidden></p>
+                <div class="buy-actions">
+                    <button type="button" onclick="closeAuthModal()">Cancel</button>
+                    <button type="submit" class="buy-submit">SIGN IN</button>
+                </div>
+            </form>
+
+            <form id="signupForm" hidden autocomplete="off">
+                <label for="signupName">Full name</label>
+                <input type="text" id="signupName" name="signupName" autocomplete="name" required>
+                <label for="signupEmail">Email</label>
+                <input type="email" id="signupEmail" name="signupEmail" autocomplete="email" required>
+                <label for="signupPhone">Phone</label>
+                <input type="tel" id="signupPhone" name="signupPhone" autocomplete="tel">
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" name="signupPassword" autocomplete="new-password" minlength="6" required>
+                <p id="signupMessage" class="auth-message" hidden></p>
+                <div class="buy-actions">
+                    <button type="button" onclick="closeAuthModal()">Cancel</button>
+                    <button type="submit" class="buy-submit">CREATE ACCOUNT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="buyModal" class="buy-modal" hidden>
+        <div class="buy-dialog" role="dialog" aria-labelledby="buyTitle" aria-modal="true">
+            <h2 id="buyTitle">Buy product</h2>
+            <p class="buy-product-line">
+                <strong id="buyProductName"></strong> — <span id="buyProductPrice"></span>
+            </p>
+            <form id="buyForm">
+                <label for="buyName">Full name</label>
+                <input type="text" id="buyName" name="buyName" required>
+                <label for="buyEmail">Email</label>
+                <input type="email" id="buyEmail" name="buyEmail" required>
+                <label for="buyPhone">Phone</label>
+                <input type="tel" id="buyPhone" name="buyPhone" required>
+                <label for="buyAddress">Delivery address</label>
+                <textarea id="buyAddress" name="buyAddress" rows="3" required></textarea>
+                <label for="buyQty">Quantity</label>
+                <input type="number" id="buyQty" name="buyQty" min="1" value="1" required>
+                <label for="buyPay">Payment method</label>
+                <select id="buyPay" name="buyPay" required>
+                    <option value="Card">Card</option>
+                    <option value="Cash on delivery">Cash on delivery</option>
+                    <option value="Bank transfer">Bank transfer</option>
+                </select>
+                <p id="buyMessage" class="buy-message" hidden></p>
+                <div class="buy-actions">
+                    <button type="button" onclick="closeBuyForm()">Cancel</button>
+                    <button type="submit" class="buy-submit">Place order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social">
+            <a href="https://github.com/manojpanthi123" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#181717"/><path fill="#fff" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.77 2.36 1.26 2.94.96.09-.75.35-1.26.63-1.55-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.7.12 2.5.34 1.9-1.32 2.74-1.05 2.74-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#FF0000"/><path fill="#fff" d="M10 8.5v7l6-3.5-6-3.5z"/></svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#1DA1F2"/><path fill="#fff" d="M19.6 7.4c-.5.2-1.1.4-1.7.5.6-.4 1.1-1 1.3-1.7-.6.4-1.2.6-1.9.8A2.9 2.9 0 0 0 12 9.4c0 .2 0 .5.1.7-2.4-.1-4.6-1.3-6-3.1-.3.5-.4 1-.4 1.6 0 1 .5 1.9 1.3 2.5-.5 0-.9-.1-1.3-.4v.1c0 1.4 1 2.6 2.3 2.9-.2.1-.5.1-.8.1-.2 0-.4 0-.6-.1.4 1.2 1.5 2 2.8 2.1A5.8 5.8 0 0 1 5 16.6 8.2 8.2 0 0 0 9.4 18c5.3 0 8.2-4.4 8.2-8.2v-.4c.6-.4 1.1-1 1.5-1.6z"/></svg>
+            </a>
+            <a href="#" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#1877F2"/><path fill="#fff" d="M15.1 12.5h-2V19H10.3v-6.5H8.8V10h1.5V8.4c0-1.3.6-3.3 3.3-3.3h2.4v2.6h-1.7c-.3 0-.7.1-.7.8V10h2.5l-.4 2.5z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+                <svg viewBox="0 0 24 24">
+                    <defs>
+                        <linearGradient id="ig" x1="0" y1="1" x2="1" y2="0">
+                            <stop offset="0" stop-color="#f58529"/>
+                            <stop offset="0.5" stop-color="#dd2a7b"/>
+                            <stop offset="1" stop-color="#8134af"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="24" height="24" rx="2" fill="url(#ig)"/>
+                    <rect x="6.2" y="6.2" width="11.6" height="11.6" rx="3.4" fill="none" stroke="#fff" stroke-width="1.6"/>
+                    <circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" stroke-width="1.6"/>
+                    <circle cx="16.2" cy="7.8" r="0.9" fill="#fff"/>
+                </svg>
+            </a>
+        </div>
+        <div class="copyright"><strong>© Manoj Panthi (EIT)</strong></div>
+        <a class="privacy" href="#">Privacy Policy</a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script src="javascript.js"></script>
+    <script src="search.js"></script>
+    <script src="privacy.js"></script>
+    <script src="menu.js?v=left"></script>
+</body>
+</html>

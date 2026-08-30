@@ -1,0 +1,100 @@
+.privacy-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.privacy-overlay[hidden] {
+    display: none;
+}
+
+.privacy-dialog {
+    width: min(560px, 100%);
+    background: #fff;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+}
+
+.privacy-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.privacy-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.privacy-x {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    background: transparent;
+    font-size: 22px;
+    line-height: 1;
+    color: #666;
+    cursor: pointer;
+}
+
+.privacy-x:hover {
+    color: #111;
+}
+
+.privacy-body {
+    padding: 16px 18px 12px;
+    color: #444;
+    font-size: 14px;
+    line-height: 1.55;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.privacy-body p {
+    margin: 0 0 12px;
+}
+
+.privacy-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 12px 16px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.privacy-footer button {
+    min-width: 72px;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.privacy-close-btn {
+    background: #8a8a8a;
+}
+
+.privacy-close-btn:hover {
+    background: #747474;
+}
+
+.privacy-agree-btn {
+    background: #1a73e8;
+}
+
+.privacy-agree-btn:hover {
+    background: #1558d6;
+}

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Character set and mobile viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Research - ITWD6.408</title>
+
+    <!-- Page styles, shared search, privacy popup, and mobile menu -->
+    <style>
+/* =====================================================
+   RESEARCH PAGE STYLES
+   Layout: CSS Grid for the 6 flip boxes
+            Flexbox for header, card front, footer
+   Responsive: media queries for tablet and mobile
+===================================================== */
+
+/* ---------- Reset ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---------- Page shell (flex column so footer stays at the bottom) ---------- */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    color: #222;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =====================================================
+   HEADER  (flexbox row)
+===================================================== */
+header {
+    min-height: 52px;
+    background: linear-gradient(to bottom, #c4e2ba, #9fd381);
+    display: flex;
+    align-items: center;
+    padding: 0 18px 0 14px;
+    gap: 16px;
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.logo svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+header nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 42px;
+}
+
+header nav a {
+    color: #111;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    padding: 4px 8px;
+}
+
+header nav a.active {
+    color: #e03a00;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+}
+
+header nav a:hover {
+    color: #111;
+    background: #ffff00;
+    text-decoration: none;
+}
+
+.search-btn {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #222;
+    flex-shrink: 0;
+}
+
+.search-btn:hover {
+    color: #174f08;
+}
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+.main-container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 18px auto 24px;
+    padding: 0 20px;
+    flex: 1;
+}
+
+.instruction {
+    text-align: center;
+    margin: 0 0 14px;
+    font-size: 13px;
+    color: #6b8d5b;
+    font-style: italic;
+}
+
+/* =====================================================
+   RESEARCH GRID
+   Desktop: 3 columns
+   Tablet:  2 columns  (@media max-width 900px)
+   Mobile:  1 column   (@media max-width 600px)
+===================================================== */
+.research-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+
+/* =====================================================
+   FLIP BOX
+   3D flip uses perspective, transform, and backface-visibility.
+   JavaScript adds .flipped on click / keyboard.
+===================================================== */
+.flip-card {
+    background: transparent;
+    width: 100%;
+    height: 360px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flip-card:focus {
+    outline: 2px solid #c9a024;
+    outline-offset: 3px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s;
+    transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front and back share the same size and sit on top of each other */
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 2px;
+    border: 2px solid #c9a024;
+    box-sizing: border-box;
+    background: #fde6c8;
+}
+
+/* Front: title on top, image fills the rest (flex column) */
+.flip-card-front {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 12px 10px;
+}
+
+.flip-card-front h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    color: #111;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.25;
+    margin: 0 0 10px;
+    min-height: 2.5em;
+}
+
+.flip-card-front img {
+    width: 100%;
+    flex: 1;
+    object-fit: cover;
+    display: block;
+    background: #fff;
+}
+
+/* Back is rotated 180deg so it faces the user after the flip */
+.flip-card-back {
+    transform: rotateY(180deg);
+    overflow-y: auto;
+    padding: 14px 14px 16px;
+}
+
+.flip-card-back h2 {
+    color: #111;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    margin-bottom: 8px;
+    border-bottom: 2px solid #c9a024;
+    padding-bottom: 6px;
+}
+
+.flip-card-back p {
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.flip-card-back h3 {
+    font-size: 13px;
+    color: #5a3d00;
+    margin: 8px 0 4px;
+}
+
+.flip-card-back ul,
+.flip-card-back ol {
+    padding-left: 18px;
+    margin: 6px 0 12px;
+}
+
+.flip-card-back li {
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+/* APA 7 reference with clickable URL */
+.reference {
+    display: block;
+    max-width: 100%;
+    padding: 7px 10px;
+    background: #fff4d6;
+    border: 1px solid #c9a024;
+    border-radius: 3px;
+    color: #333;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.reference em {
+    font-style: italic;
+}
+
+.reference .ref-url {
+    color: #1558d6;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    word-break: break-all;
+}
+
+.reference:hover {
+    background: #ffe9a8;
+}
+
+.reference:hover .ref-url {
+    color: #0b3fa8;
+}
+
+/* =====================================================
+   FOOTER  (CSS grid: social | copyright | privacy)
+===================================================== */
+footer {
+    min-height: 52px;
+    background: linear-gradient(to bottom, #c4e2ba, #a1d387);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 8px 18px;
+    gap: 12px;
+}
+
+.social {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.social a {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.social a svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+}
+
+.copyright {
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.privacy {
+    justify-self: end;
+    color: #1558d6;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.privacy:hover {
+    color: #0b3fa8;
+}
+
+/* =====================================================
+   TABLET  — 2 columns
+===================================================== */
+@media (min-width: 601px) {
+    .research-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 901px) {
+    .research-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .flip-card {
+        height: 340px;
+    }
+
+    header nav {
+        gap: 16px;
+    }
+}
+
+/* =====================================================
+   MOBILE  — 1 column
+===================================================== */
+@media (max-width: 600px) {
+    header {
+        flex-wrap: wrap;
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 14px;
+    }
+
+    .main-container {
+        margin: 16px auto;
+        padding: 0 12px;
+    }
+
+    .research-grid {
+        gap: 16px;
+    }
+
+    .flip-card {
+        height: 380px;
+    }
+
+    .flip-card-front h2 {
+        font-size: 15px;
+        min-height: 0;
+    }
+
+    footer {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .privacy {
+        justify-self: center;
+    }
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+@media (max-width: 400px) {
+    .flip-card {
+        height: 360px;
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        padding: 12px;
+    }
+}
+    </style>
+    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="privacy.css">
+    <link rel="stylesheet" href="menu.css?v=left">
+</head>
+
+<body>
+
+    <!-- ========================= HEADER ========================= -->
+    <header>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" title="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <a class="logo" href="index.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="#1a1a1a" stroke-width="1.7"/>
+                <ellipse cx="12" cy="12" rx="4.5" ry="10" fill="none" stroke="#1a1a1a" stroke-width="1.4"/>
+                <path d="M2 12h20M4.2 7h15.6M4.2 17h15.6" fill="none" stroke="#1a1a1a" stroke-width="1.4"/>
+            </svg>
+            ITWD6.408
+        </a>
+
+        <nav aria-label="Main navigation">
+            <a href="index.html">HOME</a>
+            <a href="form.html">FORMS</a>
+            <a href="web-api.html">WebAPI</a>
+            <a href="js-demo.html">JAVASCRIPT</a>
+            <a class="active" href="my-research.html">RESEARCH</a>
+        </nav>
+
+        <button class="search-btn" type="button" aria-label="Search" title="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="2.2"/>
+                <path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+        </button>
+    </header>
+
+    <!-- ========================= MAIN: 6 FLIP BOXES ========================= -->
+    <main class="main-container">
+        <p class="instruction">Click or tap a research card to flip it. Each back summarises the topic, lists practical points, and ends with an APA-style reference (the URL is clickable).</p>
+
+        <!-- CSS Grid: 3 columns on desktop, 2 on tablet, 1 on mobile -->
+        <section class="research-grid">
+
+            <!-- ---------- Topic 1: Copyright / Creative Commons / Fair Use ---------- -->
+            <article class="flip-card" id="copyright" tabindex="0">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h2>Copyright, Creative Common (CC) Licenses, Fair Use</h2>
+                        <img src="images/research-copyright.png" alt="The spectrum of rights: copyright, Creative Commons and public domain">
+                    </div>
+                    <div class="flip-card-back">
+                        <h2>Copyright, CC Licenses &amp; Fair Use</h2>
+                        <p>
+                            Copyright is a legal right that lets a creator control copying, sharing and adapting of their work. On websites this includes text, photos, video, audio, logos and often source code.
+                        </p>
+                        <h3>Four Creative Commons licence types</h3>
+                        <ol>
+                            <li>CC BY — reuse is allowed if the creator is credited.</li>
+                            <li>CC BY-SA — reuse is allowed with credit, and new work must use the same licence (share-alike).</li>
+                            <li>CC BY-NC — reuse is allowed with credit, but not for commercial use.</li>
+                            <li>CC BY-ND — reuse is allowed with credit, but the work must not be adapted (no derivatives).</li>
+                        </ol>
+                        <h3>Fair dealing in New Zealand</h3>
+                        <p>
+                            New Zealand does not use US “fair use”. The Copyright Act 1994 allows limited <strong>fair dealing</strong> for criticism, review, news reporting, research and private study. Copying a whole page or image “because it is for class” is not automatically lawful.
+                        </p>
+                        <a class="reference" href="https://creativecommons.org/share-your-work/cclicenses/" target="_blank" rel="noopener noreferrer">
+                            Creative Commons. (n.d.). <em>About CC licenses</em>. <span class="ref-url">https://creativecommons.org/share-your-work/cclicenses/</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ---------- Topic 2: Privacy and web privacy policy ---------- -->
+            <article class="flip-card" id="privacy" tabindex="0">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h2>Privacy &amp; Web Privacy Policy</h2>
+                        <img src="images/research-privacy.png" alt="Online privacy with a laptop, tablet and lock icon">
+                    </div>
+                    <div class="flip-card-back">
+                        <h2>Privacy &amp; Web Privacy Policy</h2>
+                        <p>
+                            A privacy policy tells visitors what personal data a site collects, why it is collected, how long it is stored, and who it is shared with. This portfolio has a short policy in the footer. New Zealand’s Privacy Act 2020 sets 13 information privacy principles.
+                        </p>
+                        <h3>13 information privacy principles</h3>
+                        <ol>
+                            <li>Purpose of collection — collect only for a lawful, stated purpose.</li>
+                            <li>Source — collect from the person where practicable.</li>
+                            <li>Collection from the individual — tell them who you are and why you collect.</li>
+                            <li>Manner of collection — collect fairly and without unreasonable intrusion.</li>
+                            <li>Storage and security — protect the data from loss or misuse.</li>
+                            <li>Access — people can ask to see their information.</li>
+                            <li>Correction — people can ask for inaccurate data to be corrected.</li>
+                            <li>Accuracy — take reasonable steps to keep data accurate.</li>
+                            <li>Retention — do not keep personal data longer than needed.</li>
+                            <li>Limits on use — use it only for the purpose it was collected, unless an exception applies.</li>
+                            <li>Limits on disclosure — do not share it unless allowed.</li>
+                            <li>Unique identifiers — do not assign unique IDs unless necessary.</li>
+                            <li>Disclosure outside New Zealand — extra care before sending data overseas.</li>
+                        </ol>
+                        <a class="reference" href="https://www.privacy.org.nz/privacy-act-2020/privacy-principles/" target="_blank" rel="noopener noreferrer">
+                            Office of the Privacy Commissioner. (n.d.). <em>Information privacy principles</em>. <span class="ref-url">https://www.privacy.org.nz/privacy-act-2020/privacy-principles/</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ---------- Topic 3: Search engine optimisation ---------- -->
+            <article class="flip-card" id="seo" tabindex="0">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h2>HOW TO IMPROVE YOUR WEBSITE SEO?</h2>
+                        <img src="images/research-seo.png" alt="Google SEO with an upward red arrow">
+                    </div>
+                    <div class="flip-card-back">
+                        <h2>How to Improve Website SEO</h2>
+                        <p>
+                            Search engine optimisation (SEO) is the set of techniques that help a page appear in search results for relevant queries.
+                        </p>
+                        <h3>Five ways to improve visibility</h3>
+                        <ol>
+                            <li>Write a unique title tag and meta description for every page.</li>
+                            <li>Use clear headings (h1, h2) that match what people search for.</li>
+                            <li>Make the site mobile-friendly and reasonably fast to load.</li>
+                            <li>Add descriptive alt text to images and use readable URLs.</li>
+                            <li>Publish original content and link related pages together (internal links).</li>
+                        </ol>
+                        <a class="reference" href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank" rel="noopener noreferrer">
+                            Google. (n.d.). <em>SEO starter guide: The basics</em>. Google Search Central. <span class="ref-url">https://developers.google.com/search/docs/fundamentals/seo-starter-guide</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ---------- Topic 4: Choosing a web hosting provider ---------- -->
+            <article class="flip-card" id="hosting" tabindex="0">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h2>Factors you should know when choosing a right web hosting provider</h2>
+                        <img src="images/research-hosting.png" alt="Web hosting servers, globe and network collage">
+                    </div>
+                    <div class="flip-card-back">
+                        <h2>Choosing a Web Hosting Provider</h2>
+                        <p>
+                            Web hosting stores website files on a server and makes them available on the internet.
+                        </p>
+                        <h3>Five factors to consider</h3>
+                        <ol>
+                            <li>Uptime and reliability — how often the site stays online.</li>
+                            <li>Speed and server location — closer servers load faster for local users.</li>
+                            <li>HTTPS / SSL, storage and bandwidth included in the plan.</li>
+                            <li>Backups and support — can you restore the site, and is help available?</li>
+                            <li>Price and room to scale — can you upgrade later without rebuilding?</li>
+                        </ol>
+                        <a class="reference" href="https://www.cloudflare.com/learning/cdn/glossary/web-hosting/" target="_blank" rel="noopener noreferrer">
+                            Cloudflare. (n.d.). <em>What is web hosting?</em> <span class="ref-url">https://www.cloudflare.com/learning/cdn/glossary/web-hosting/</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ---------- Topic 5: Web performance and maintenance ---------- -->
+            <article class="flip-card" id="performance" tabindex="0">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h2>WEB PERFORMANCE AND MAINTENANCE</h2>
+                        <img src="images/research-performance.png" alt="Website performance chart and maintenance gears">
+                    </div>
+                    <div class="flip-card-back">
+                        <h2>Web Performance and Maintenance</h2>
+                        <h3>Five ways to reduce page loading time</h3>
+                        <ol>
+                            <li>Compress and resize images before upload.</li>
+                            <li>Minify or remove unused CSS and JavaScript.</li>
+                            <li>Enable browser caching and, where possible, a CDN.</li>
+                            <li>Reduce the number of HTTP requests (fewer extra fonts and scripts).</li>
+                            <li>Measure Core Web Vitals and fix slow Largest Contentful Paint.</li>
+                        </ol>
+                        <h3>Five maintenance tasks</h3>
+                        <ol>
+                            <li>Apply software and library updates.</li>
+                            <li>Take and test backups.</li>
+                            <li>Fix broken links, 404 pages and forms.</li>
+                            <li>Review content so it stays accurate.</li>
+                            <li>Check security (HTTPS, passwords, access) after each change.</li>
+                        </ol>
+                        <a class="reference" href="https://web.dev/learn/" target="_blank" rel="noopener noreferrer">
+                            Google. (n.d.). <em>Learn web development</em>. web.dev. <span class="ref-url">https://web.dev/learn/</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ---------- Topic 6: Web security ---------- -->
+            <article class="flip-card" id="security" tabindex="0">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h2>WEB SECURITY</h2>
+                        <img src="images/research-security.png" alt="Website security and cyber attacks collage">
+                    </div>
+                    <div class="flip-card-back">
+                        <h2>Web Security</h2>
+                        <h3>Five common attacks and how to prevent them</h3>
+                        <ol>
+                            <li>Cross-site scripting (XSS) — escape or sanitise user input before it is shown on the page.</li>
+                            <li>SQL injection — use parameterised queries; never build SQL by joining strings from the form.</li>
+                            <li>Phishing / fake login pages — use HTTPS, a clear domain, and never ask for passwords by email.</li>
+                            <li>Brute-force login — strong passwords, account lockout or rate limits, and hashed passwords (never plain text).</li>
+                            <li>Broken access control — check on the server that a user may only read or change their own records.</li>
+                        </ol>
+                        <a class="reference" href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">
+                            OWASP Foundation. (n.d.). <em>OWASP Top Ten</em>. <span class="ref-url">https://owasp.org/www-project-top-ten/</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- ========================= FOOTER ========================= -->
+    <footer>
+        <div class="social">
+            <a href="https://github.com/manojpanthi123" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#181717"/><path fill="#fff" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.77 2.36 1.26 2.94.96.09-.75.35-1.26.63-1.55-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85 0 1.7.12 2.5.34 1.9-1.32 2.74-1.05 2.74-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#FF0000"/><path fill="#fff" d="M10 8.5v7l6-3.5-6-3.5z"/></svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#1DA1F2"/><path fill="#fff" d="M19.6 7.4c-.5.2-1.1.4-1.7.5.6-.4 1.1-1 1.3-1.7-.6.4-1.2.6-1.9.8A2.9 2.9 0 0 0 12 9.4c0 .2 0 .5.1.7-2.4-.1-4.6-1.3-6-3.1-.3.5-.4 1-.4 1.6 0 1 .5 1.9 1.3 2.5-.5 0-.9-.1-1.3-.4v.1c0 1.4 1 2.6 2.3 2.9-.2.1-.5.1-.8.1-.2 0-.4 0-.6-.1.4 1.2 1.5 2 2.8 2.1A5.8 5.8 0 0 1 5 16.6 8.2 8.2 0 0 0 9.4 18c5.3 0 8.2-4.4 8.2-8.2v-.4c.6-.4 1.1-1 1.5-1.6z"/></svg>
+            </a>
+            <a href="#" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><rect width="24" height="24" rx="2" fill="#1877F2"/><path fill="#fff" d="M15.1 12.5h-2V19H10.3v-6.5H8.8V10h1.5V8.4c0-1.3.6-3.3 3.3-3.3h2.4v2.6h-1.7c-.3 0-.7.1-.7.8V10h2.5l-.4 2.5z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+                <svg viewBox="0 0 24 24">
+                    <defs>
+                        <linearGradient id="ig" x1="0" y1="1" x2="1" y2="0">
+                            <stop offset="0" stop-color="#f58529"/>
+                            <stop offset="0.5" stop-color="#dd2a7b"/>
+                            <stop offset="1" stop-color="#8134af"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="24" height="24" rx="2" fill="url(#ig)"/>
+                    <rect x="6.2" y="6.2" width="11.6" height="11.6" rx="3.4" fill="none" stroke="#fff" stroke-width="1.6"/>
+                    <circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" stroke-width="1.6"/>
+                    <circle cx="16.2" cy="7.8" r="0.9" fill="#fff"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="copyright"><strong>© Manoj Panthi (EIT)</strong></div>
+
+        <a class="privacy" href="#">Privacy Policy</a>
+    </footer>
+
+    <script src="research.js"></script>
+    <script src="search.js"></script>
+    <script src="privacy.js"></script>
+    <script src="menu.js?v=left"></script>
+
+</body>
+
+</html>
