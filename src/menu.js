@@ -23,12 +23,12 @@
     function pinMenu(open) {
         panel.style.setProperty("position", "fixed", "important");
         panel.style.setProperty("top", "0", "important");
-        panel.style.setProperty("left", "0", "important");
-        panel.style.setProperty("right", "auto", "important");
+        panel.style.setProperty("right", "0", "important");
+        panel.style.setProperty("left", "auto", "important");
         panel.style.setProperty("bottom", "0", "important");
         panel.style.setProperty(
             "transform",
-            open ? "translateX(0)" : "translateX(-100%)",
+            open ? "translateX(0)" : "translateX(100%)",
             "important"
         );
     }
