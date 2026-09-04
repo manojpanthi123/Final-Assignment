@@ -40,7 +40,7 @@
                 "<p>Our website may use cookies and browser storage (localStorage / sessionStorage) to improve functionality, remember form answers, login session, cart items, display preferences, and analyse website usage. You can clear these in your browser.</p>" +
                 "<h3>7. Contact Us</h3>" +
                 "<p>If you have questions about this Privacy Policy, please contact us at:</p>" +
-                "<p>Email: support@mywebsite.com<br>" +
+                "<p>Email: <a href=\"mailto:manojpanthi125@gmail.com\">manojpanthi125@gmail.com</a><br>" +
                 "Phone: 06-974-8000<br>" +
                 "Address: 501 Gloucester Street, Taradale, Napier 4112</p>" +
                 "<p>By clicking \"Agree\" you acknowledge that you have read and accept this privacy policy.</p>" +
