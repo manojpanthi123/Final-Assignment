@@ -4,7 +4,8 @@ Learning portfolio for **ITWD6.408 Advanced Internet and Web Development** (Seme
 
 **GitHub (source code):** https://github.com/manojpanthi123/Final-Assignment  
 **GitHub Pages:** https://manojpanthi123.github.io/Final-Assignment/  
-**Vercel:** import this GitHub repo in [Vercel](https://vercel.com/new). `vercel.json` publishes the `src` folder. Supabase already powers the HTML form, WebAPI list, and Demo 4 login.
+**Vercel (live site):** https://final-assignment-tan.vercel.app  
+`vercel.json` publishes the `src` folder. Supabase powers the HTML form, WebAPI list, and Demo 4 login.
 
 | Page | File |
 | --- | --- |
