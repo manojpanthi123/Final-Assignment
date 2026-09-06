@@ -826,6 +826,17 @@ function initShopDashboard() {
     shopCalendar.render();
 }
 
+window.addEventListener("resize", function () {
+    shopCharts.forEach(function (chart) {
+        if (chart && typeof chart.resize === "function") {
+            chart.resize();
+        }
+    });
+    if (shopCalendar && typeof shopCalendar.updateSize === "function") {
+        shopCalendar.updateSize();
+    }
+});
+
 /* Demo 4: shopping cart */
 
 const CART_KEY = "demo4Cart";
