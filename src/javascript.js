@@ -744,7 +744,11 @@ function initShopDashboard() {
                 tension: 0.3
             }]
         },
-        options: { responsive: true, maintainAspectRatio: false }
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { labels: { font: { size: 11 } } } }
+        }
     }));
 
     shopCharts.push(new Chart(bar, {
@@ -757,7 +761,23 @@ function initShopDashboard() {
                 backgroundColor: ["#ffbd00", "#4e9a06", "#1e4fc2", "#c2410c", "#7b3fa3", "#0A66C2"]
             }]
         },
-        options: { responsive: true, maintainAspectRatio: false }
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: { padding: { bottom: 2 } },
+            plugins: { legend: { labels: { font: { size: 11 } } } },
+            scales: {
+                x: {
+                    ticks: {
+                        maxRotation: 0,
+                        minRotation: 0,
+                        font: { size: 10 },
+                        autoSkip: false
+                    }
+                },
+                y: { beginAtZero: true }
+            }
+        }
     }));
 
     shopCharts.push(new Chart(pie, {
@@ -769,7 +789,17 @@ function initShopDashboard() {
                 backgroundColor: ["#ffbd00", "#1e4fc2", "#c2410c"]
             }]
         },
-        options: { responsive: true, maintainAspectRatio: false }
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: { padding: 6 },
+            plugins: {
+                legend: {
+                    position: "bottom",
+                    labels: { boxWidth: 10, font: { size: 11 } }
+                }
+            }
+        }
     }));
 
     const calendarEl = document.getElementById("shopCalendar");

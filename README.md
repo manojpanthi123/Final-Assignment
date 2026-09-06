@@ -2,7 +2,6 @@
 
 Learning portfolio for **ITWD6.408 Advanced Internet and Web Development** (Semester 2, 2026).
 
-**GitHub:** https://github.com/manojpanthi123/Final-Assignment  
 **Live site:** https://manojpanthi123.github.io/Final-Assignment/
 
 | Page | File |
